@@ -16,8 +16,7 @@ import static play.test.Helpers.*;
 public class ModelsTest extends WithApplication {
     @Before
     public void setUp() {
-        start(fakeApplication(inMemoryDatabase()));
-
+        start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
         Ebean.save((List) Yaml.load("test-data.yml"));
     }
 
@@ -39,7 +38,6 @@ public class ModelsTest extends WithApplication {
     public void findProjectsInvolving() {
         List<Project> results = Project.findInvolving("bob@example.com");
         assertEquals(5, results.size());
-//        assertEquals("Play 2.0", results.get(0).name);
     }
 
     @Test
